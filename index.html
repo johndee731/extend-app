@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>{% block title %} Virtual Cards {% endblock %}</h1>
+    
+    {% for virtual_card in virtual_cards %}
+        <a href="{{url_for('display_card_transactions', card_id=virtual_card['id'], auth_token=auth_token)}}">
+            <h2>{{ virtual_card['displayName'] }}</h2>
+        </a>
+
+        <p>Balance: {{ "%.2f"|format(virtual_card['balanceCents'] / 100) }} {{ virtual_card['currency'] }} </p>
+        <p>Spend: {{ "%.2f"|format(virtual_card['spentCents'] / 100) }} {{ virtual_card['currency'] }} </p>
+        
+        <hr>
+    {% endfor %}
+{% endblock %}
